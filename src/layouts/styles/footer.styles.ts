@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterLayout = styled.footer`
-  background-color: "#f2f2f2";
+  background-color: #000000;
   min-height: 40px;
   padding: 20px 40px;
   font-size: 14px;
@@ -10,4 +10,15 @@ export const FooterLayout = styled.footer`
   align-items: center;
   justify-content: center;
   gap: 20px;
+  a {
+    margin: 0px 10px;
+    color: gray;
+    &:hover {
+      color: black;
+      cursor: pointer;
+    }
+    &:focus {
+      color: blue;
+    }
+  }
 `;

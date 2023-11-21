@@ -4,7 +4,7 @@ export const HeaderLayout = styled.header`
   display: flex;
   justify-content: space-between;
   flex-direction: row-reverse;
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid gray;
   min-height: 40px;
   align-items: center;
   a {
@@ -19,3 +19,10 @@ export const HeaderLayout = styled.header`
     }
   }
 `;
+export const HomeLogo = styled.div`
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+`;
+
+export const MenuBox = styled.div``;

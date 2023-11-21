@@ -1,15 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HeaderLayout } from "./styles/header.styles";
+import { HeaderLayout, HomeLogo, MenuBox } from "./styles/header.styles";
 
 const Header = () => {
   return (
     <HeaderLayout>
-      <div>
+      <MenuBox>
         <Link to="/posts/new">새 글</Link>
         <Link to="/posts">게시글</Link>
         <Link to="/profile">프로필</Link>
-      </div>
+      </MenuBox>
+      <Link to="/">
+        <HomeLogo>JI Blog</HomeLogo>
+      </Link>
     </HeaderLayout>
   );
 };
