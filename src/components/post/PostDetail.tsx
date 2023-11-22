@@ -12,7 +12,7 @@ const PostDetail = () => {
           </div>
           <div className="post__profile-box">
             <div className="post__profile" />
-            <div className="post__author-name">패스트캠퍼스</div>
+            <div className="post__author-name">test</div>
             <div className="post__date">2023.07.08 토요일</div>
           </div>
           <div className="post__utils-box">

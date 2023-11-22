@@ -5,6 +5,7 @@ import {
   TabType,
 } from "components/post/interface/post.interface";
 import "components/post/styles/post.css";
+import Header from "layouts/Header";
 
 const PostList = (props: IPostListProps) => {
   const { Navigation } = props;
@@ -36,7 +37,7 @@ const PostList = (props: IPostListProps) => {
             <Link to={`/posts/${index}`}>
               <div className="post__profile-box">
                 <div className="post__profile" />
-                <div className="post__author-name">패스트캠퍼스</div>
+                <div className="post__author-name">test</div>
                 <div className="post__date">2023.07.08 토요일</div>
               </div>
               <div className="post__title">게시글 {index}</div>
