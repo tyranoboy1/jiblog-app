@@ -5,7 +5,6 @@ import {
   TabType,
 } from "components/post/interface/post.interface";
 import "components/post/styles/post.css";
-import Header from "layouts/Header";
 
 const PostList = (props: IPostListProps) => {
   const { Navigation } = props;
