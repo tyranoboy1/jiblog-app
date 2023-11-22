@@ -1,8 +1,13 @@
-import { HomeContainer } from "./styles/home.styles";
-import PostList from "../post/PostList";
+import PostList from "components/post/PostList";
+import Carousel from "components/view/Carousel";
 
 const Home = () => {
-  return <HomeContainer>{/* <PostList Navigation={false} /> */}</HomeContainer>;
+  return (
+    <div>
+      <Carousel />
+      <PostList Navigation={false} />
+    </div>
+  );
 };
 
 export default Home;

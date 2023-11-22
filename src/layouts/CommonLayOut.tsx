@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header";
+import Header from "layouts/Header";
 import { Outlet } from "react-router-dom";
-import Footer from "./Footer";
+import Footer from "layouts/Footer";
 
 const CommonLayOut = () => {
   return (

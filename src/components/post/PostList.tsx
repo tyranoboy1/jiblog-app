@@ -1,77 +1,69 @@
-import React, { useState } from "react";
-import {} from "../home/styles/home.styles";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  FilterBox,
-  FilterList,
-  PostAuthor,
-  PostBox,
-  PostDate,
-  PostListBox,
-  PostProfileAvatar,
-  PostProfileBox,
-  PostText,
-  PostTitle,
-  UtilBox,
-  UtilText,
-} from "./styles/post.styles";
-import { IPostListProps } from "./interface/post.interface";
+  IPostListProps,
+  TabType,
+} from "components/post/interface/post.interface";
+import "components/post/styles/post.css";
 
 const PostList = (props: IPostListProps) => {
   const { Navigation } = props;
-  const [activeFilter, setActiveFilter] = useState("");
+  const [activeTab, setActiveTab] = useState<TabType>("all");
 
-  const handleFilterClick = (filterName: string) => {
-    setActiveFilter(filterName);
-  };
   return (
     <>
       {Navigation && (
-        <FilterBox>
-          <FilterList
-            active={activeFilter === "전체"}
-            onClick={() => handleFilterClick("전체")}
+        <div className="post__navigation">
+          <div
+            role="presentation"
+            onClick={() => setActiveTab("all")}
+            className={activeTab === "all" ? "post__navigation--active" : ""}
           >
             전체
-          </FilterList>
-          <FilterList
-            active={activeFilter === "새글"}
-            onClick={() => handleFilterClick("새글")}
+          </div>
+          <div
+            role="presentation"
+            onClick={() => setActiveTab("my")}
+            className={activeTab === "my" ? "post__navigation--active" : ""}
           >
-            새글
-          </FilterList>
-        </FilterBox>
+            나의 글
+          </div>
+        </div>
       )}
-
-      <PostBox>
-        {[...Array(10)].map((item, index) => (
-          <PostListBox key={index}>
+      <div className="post__list">
+        {[...Array(10)].map((e, index) => (
+          <div key={index} className="post__box">
             <Link to={`/posts/${index}`}>
-              <PostProfileBox>
-                <PostProfileAvatar />
-                <PostAuthor>ji hoon</PostAuthor>
-                <PostDate>2023.11월.21일 화요일</PostDate>
-              </PostProfileBox>
-              <PostTitle>게시글{index}</PostTitle>
-              <PostText>안녕하세요 한지훈입니다.</PostText>
-              <UtilBox>
-                <UtilText
-                  active={activeFilter === "삭제"}
-                  onClick={() => handleFilterClick("삭제")}
-                >
-                  삭제
-                </UtilText>
-                <UtilText
-                  active={activeFilter === "수정"}
-                  onClick={() => handleFilterClick("수정")}
-                >
-                  수정
-                </UtilText>
-              </UtilBox>
+              <div className="post__profile-box">
+                <div className="post__profile" />
+                <div className="post__author-name">패스트캠퍼스</div>
+                <div className="post__date">2023.07.08 토요일</div>
+              </div>
+              <div className="post__title">게시글 {index}</div>
+              <div className="post__text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                eget pretium nunc. Duis sed arcu eget leo maximus fermentum vel
+                ut risus. Morbi quis enim consequat, venenatis mauris a,
+                bibendum justo. Vestibulum eros risus, feugiat eget auctor et,
+                lacinia in quam. Pellentesque pellentesque nunc ultricies nulla
+                convallis finibus. Nulla interdum laoreet ex, id euismod arcu.
+                Vestibulum pulvinar sem dolor, in laoreet nunc faucibus eu.
+                Suspendisse convallis vehicula turpis ut dignissim. Sed nec
+                turpis suscipit, ultricies nisi non, ullamcorper diam. Duis non
+                ullamcorper enim. Suspendisse egestas lorem sed enim gravida,
+                sit amet ultricies ligula dignissim. Praesent nec consequat est.
+                Praesent interdum blandit dolor, a dapibus erat gravida ut.
+                Maecenas blandit diam est, ut viverra augue faucibus ut.
+                Curabitur varius vestibulum erat sit amet malesuada.
+              </div>
+              <div className="post__utils-box">
+                <div className="post__delete">삭제</div>
+                <div className="post__edit">수정</div>
+              </div>
             </Link>
-          </PostListBox>
+          </div>
         ))}
-      </PostBox>
+      </div>
     </>
   );
 };

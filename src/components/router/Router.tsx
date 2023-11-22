@@ -1,14 +1,14 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 
-import Home from "../home/Home";
-import PostList from "../post/PostList";
-import PostDetail from "../post/PostDetail";
-import PostNew from "../post/PostNew";
-import PostEdit from "../post/PostEdit";
-import Profile from "../profile/Profile";
-import Login from "../user/Login";
-import SignUp from "../user/SignUp";
-import CommonLayOut from "../../layouts/CommonLayOut";
+import Home from "components/home/Home";
+import PostList from "components/post/PostList";
+import PostDetail from "components/post/PostDetail";
+import PostNew from "components/post/PostNew";
+import PostEdit from "components/post/PostEdit";
+import Profile from "components/profile/Profile";
+import Login from "components/user/Login";
+import SignUp from "components/user/SignUp";
+import CommonLayOut from "layouts/CommonLayOut";
 
 const Router = () => {
   return (

@@ -1,14 +1,14 @@
 import React from "react";
-import { FooterLayout } from "./styles/footer.styles";
 import { Link } from "react-router-dom";
+import "layouts/styles/blogfooter.css";
 
 const Footer = () => {
   return (
-    <FooterLayout>
-      <Link to="">Menu1</Link>
-      <Link to="">Menu2</Link>
-      <Link to="">Menu3</Link>
-    </FooterLayout>
+    <footer>
+      <Link to="/posts/new">글쓰기</Link>
+      <Link to="/posts">게시글</Link>
+      <Link to="/profile">프로필</Link>
+    </footer>
   );
 };
 
