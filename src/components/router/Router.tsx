@@ -9,22 +9,33 @@ import Profile from "components/profile/Profile";
 import Login from "components/user/Login";
 import SignUp from "components/user/SignUp";
 import CommonLayOut from "layouts/CommonLayOut";
+import LoginPage from "pages/user/LoginPage";
+import SignUpPage from "pages/user/SignUpPage";
+import { IRouterProps } from "components/router/interface/router.interface";
 
-const Router = () => {
+const Router = (props: IRouterProps) => {
+  const { isAuthenticated } = props;
+
   return (
     <>
       <Routes>
-        <Route element={<CommonLayOut />}>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/posts" element={<PostList />}></Route>
-          <Route path="/posts/:id" element={<PostDetail />}></Route>
-          <Route path="/posts/new" element={<PostNew />}></Route>
-          <Route path="/posts/edit/:id" element={<PostEdit />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/sign-up" element={<SignUp />}></Route>
-          <Route path="*" element={<Navigate replace to="/" />}></Route>
-        </Route>
+        {isAuthenticated ? (
+          <Route element={<CommonLayOut />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/posts" element={<PostList />} />
+            <Route path="/posts/:id" element={<PostDetail />} />
+            <Route path="/posts/new" element={<PostNew />} />
+            <Route path="/posts/edit/:id" element={<PostEdit />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<Navigate replace to="/" />} />
+          </Route>
+        ) : (
+          <>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="*" element={<LoginPage />} />
+          </>
+        )}
       </Routes>
     </>
   );
