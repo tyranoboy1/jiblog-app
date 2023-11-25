@@ -5,6 +5,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import { app } from "firebaseApp";
 
+/** Login => 로그인 화면 컴포넌트 */
 const Login = () => {
   /** 에러 여부를 관리하는 상태변수 */
   const [error, setError] = useState<string>("");
@@ -18,7 +19,9 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      /** Firebase 인증 객체를 가져옴 */
       const auth = getAuth(app);
+      /** 이메일과 비밀번호를 사용하여 사용자를 로그인 */
       await signInWithEmailAndPassword(auth, email, password);
 
       toast.success("로그인에 성공했습니다.");

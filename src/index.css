@@ -53,8 +53,6 @@ footer {
   justify-content: center;
   gap: 20px;
   bottom: 0;
-  position: fixed;
-  width: 100%;
 }
 
 footer a {

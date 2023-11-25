@@ -1,6 +1,6 @@
 import SignUp from "components/user/SignUp";
-import React from "react";
 
+/** SignUpPage => 회원가입 페이지 컴포넌트 */
 const SignUpPage = () => {
   return <SignUp />;
 };

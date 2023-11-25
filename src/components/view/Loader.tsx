@@ -1,4 +1,4 @@
-import React from "react";
+/** 로딩 컴포넌트 */
 
 const Loader = () => {
   return <div className="loader" />;

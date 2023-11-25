@@ -6,15 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "context/AuthContext";
 
+/** Profile => 프로필 화면 컴포넌트 */
 const Profile = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  /** 사용자가 로그아웃 할때 호출 */
   const onSignOut = async () => {
     try {
+      /** Firebase 인증 객체를 가져옴 */
       const auth = getAuth(app);
+      /** signOut 함수를 호출하여 사용자 로그아웃 */
       await signOut(auth);
       toast.success("로그아웃 되었습니다.");
+      /** 로그아웃 시 경로 설정 */
       navigate("/login");
     } catch (error) {
       console.log(error);

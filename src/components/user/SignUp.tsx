@@ -5,6 +5,7 @@ import { app } from "firebaseApp";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 
+/** SignUp => 회원가입 화면 컴포넌트 */
 const SignUp = () => {
   /** 에러 여부를 관리하는 상태변수 */
   const [error, setError] = useState<string>("");
@@ -19,10 +20,12 @@ const SignUp = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      /** Firebase 인증 객체를 가져옴  */
       const auth = getAuth(app);
+      /** 새로운 사용자 계정을 Firebase에 생성 */
       await createUserWithEmailAndPassword(auth, email, password);
       toast.success("회원가입에 성공했습니다.");
-      navigate("/");
+      navigate("/login");
     } catch (error: any) {
       console.log(error);
       toast.error(error?.code);

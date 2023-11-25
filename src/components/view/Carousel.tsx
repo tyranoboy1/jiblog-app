@@ -8,7 +8,9 @@ const IMAGE_2_URL =
 const IMAGE_3_URL =
   "https://images.unsplash.com/photo-1667971286579-63a5222780ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80";
 
-export default function Carousel() {
+/** Carousel => 홈화면 이미지 배너 Carousel 컴포넌트 */
+const Carousel = () => {
+  /** 보여줄 이미지를 관리할 상태변수 */
   const [activeImage, setActiveImage] = useState(1);
 
   return (
@@ -114,4 +116,6 @@ export default function Carousel() {
       </div>
     </div>
   );
-}
+};
+
+export default Carousel;

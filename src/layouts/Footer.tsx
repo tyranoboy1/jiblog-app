@@ -1,6 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
+/** Footer => footer컴포넌트 */
 const Footer = () => {
   return (
     <footer>

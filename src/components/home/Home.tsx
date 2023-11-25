@@ -1,12 +1,13 @@
 import PostList from "components/post/PostList";
 import Carousel from "components/view/Carousel";
 
+/** Home => 홈 화면 컴포넌트 */
 const Home = () => {
   return (
-    <div>
+    <>
       <Carousel />
-      <PostList Navigation={false} />
-    </div>
+      <PostList Navigation={true} />
+    </>
   );
 };
 

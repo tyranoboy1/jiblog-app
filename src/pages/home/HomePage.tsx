@@ -1,7 +1,8 @@
-import React from "react";
+import Home from "components/home/Home";
 
+/** Home => 홈화면 컴포넌트 */
 const HomePage = () => {
-  return <div></div>;
+  return <Home />;
 };
 
 export default HomePage;
