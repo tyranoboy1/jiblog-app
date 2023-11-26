@@ -43,9 +43,9 @@ header a:hover {
 
 /* footer */
 footer {
-  background-color: yellow;
-  min-height: 40px;
-  padding: 20px 40px;
+  background-color: #f2f2f2;
+  min-height: 10px;
+  padding: 10px 20px;
   font-size: 14px;
   text-align: center;
   display: flex;
@@ -53,6 +53,8 @@ footer {
   justify-content: center;
   gap: 20px;
   bottom: 0;
+  position: fixed;
+  width: 100%;
 }
 
 footer a {
@@ -63,4 +65,58 @@ footer a {
 footer a:focus,
 footer a:hover {
   color: black;
+}
+.footer__theme-btn {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+/** 다크모드를 활성화하는 최상위 클래스 */
+.white {
+  transition: all 0.25s linear;
+  background-color: white;
+}
+.dark {
+  transition: all 0.25s linear;
+  background-color: #1e2937;
+  min-height: 100vh;
+}
+.dark a,
+.dark .form label,
+.dark .post__delete,
+.dark .profile__logout,
+.dark .form__title,
+.dark .post__navigation--active,
+.dark .post__title,
+.dark .post__author-name,
+.dark .footer__theme-btn,
+.dark .profile__name,
+.dark .comments__list {
+  color: white;
+}
+.dark a:hover,
+.dark a:focus,
+.dark .post__text,
+.dark .post__text--pre-wrap,
+.dark .profile__email,
+.dark .post__date,
+.dark .form__block,
+.dark .comment__date,
+.dark .comment__delete {
+  color: lightgray;
+}
+
+.dark .comment__delete:hover,
+.dark .comment__delete:focus {
+  color: white;
+}
+
+.dark .form__error {
+  color: #ff6a71;
+}
+
+.dark footer,
+.dark header {
+  background-color: #111827;
 }

@@ -1,9 +1,7 @@
+import PostForm from "./PostForm";
+
 const PostEdit = () => {
-  return (
-    <div>
-      <h1>PostEditPage</h1>
-    </div>
-  );
+  return <PostForm />;
 };
 
 export default PostEdit;

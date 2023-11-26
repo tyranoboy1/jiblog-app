@@ -83,3 +83,11 @@
 .form__error {
   color: red;
 }
+
+.form select {
+  border: 1px solid lightgrey;
+  max-width: 680px;
+  height: 40px;
+  padding: 0px 20px;
+  border-radius: 0.3rem;
+}

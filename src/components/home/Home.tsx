@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <Carousel />
-      <PostList Navigation={true} />
+      <PostList />
     </>
   );
 };

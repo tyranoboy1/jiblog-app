@@ -4,3 +4,7 @@ import { ReactNode } from "react";
 export interface IAuthContextProps {
   children: ReactNode;
 }
+
+export interface IThemeContextProps {
+  children: ReactNode;
+}
