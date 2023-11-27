@@ -8,3 +8,14 @@ export interface IAuthContextProps {
 export interface IThemeContextProps {
   children: ReactNode;
 }
+export interface IModalContextProps {
+  children: ReactNode;
+}
+
+export interface IModalContextData {
+  modalMessage: string | null;
+  isModalShow: boolean;
+  showModal: (content: string, onConfirm: () => void) => void;
+  hideModal: () => void;
+  onConfirm: () => void;
+}

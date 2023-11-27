@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import { AuthContextProvider } from "context/AuthContext";
 import { ThemeContextProvider } from "context/ThemeContext";
+import { ModalContextProvider } from "context/ModalContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -12,9 +13,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <ThemeContextProvider>
     <AuthContextProvider>
-      <Router>
-        <App />
-      </Router>
+      <ModalContextProvider>
+        <Router>
+          <App />
+        </Router>
+      </ModalContextProvider>
     </AuthContextProvider>
   </ThemeContextProvider>
 );
