@@ -8,12 +8,16 @@ import { db } from "firebaseApp";
 import Loader from "components/view/Loader";
 import { toast } from "react-toastify";
 import PostComment from "components/post/PostComment";
+import { useModal } from "context/ModalContext";
+import Modal from "components/modal/Modal";
 
 /** PostDetail  => 게시글 상세화면 컴포넌트 */
 const PostDetail = () => {
   /** URL에서 파라미터를 가져오는 hook */
   const params = useParams();
   const [posts, setPost] = useState<IPostType | null>(null);
+  const { showModal, isModalShow, modalMessage, onConfirm, hideModal } =
+    useModal();
   const navigate = useNavigate();
   /** 특정 ID를 가진 게시물을 가져오는 함수 */
   const getPost = async (id: string) => {
@@ -31,12 +35,13 @@ const PostDetail = () => {
   };
   /** 게시글 삭제하는 함수 */
   const handleDelete = async () => {
-    const confirm = window.confirm("해당 게시물을 삭제하시겠습니까?");
-    if (confirm && posts && posts.id) {
-      await deleteDoc(doc(db, "posts", posts?.id));
-      toast.success("게시글을 삭제하였습니다.");
-      navigate("/");
-    }
+    showModal("해당 댓글을 삭제하시겠습니까?", async () => {
+      if (posts && posts.id) {
+        await deleteDoc(doc(db, "posts", posts?.id));
+        toast.success("게시글을 삭제하였습니다.");
+        navigate("/");
+      }
+    });
   };
   React.useEffect(() => {
     if (params?.id) {
@@ -78,6 +83,18 @@ const PostDetail = () => {
           <Loader />
         )}
       </div>
+      {isModalShow && (
+        <Modal
+          message={modalMessage}
+          onConfirm={() => {
+            onConfirm();
+            hideModal();
+          }}
+          onHideModal={() => {
+            hideModal();
+          }}
+        />
+      )}
     </>
   );
 };

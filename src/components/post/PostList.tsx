@@ -21,6 +21,8 @@ import {
 import { db } from "firebaseApp";
 import AuthContext from "context/AuthContext";
 import { toast } from "react-toastify";
+import { useModal } from "context/ModalContext";
+import Modal from "components/modal/Modal";
 
 /**
  * PostList  => 게시물 리스트 컴포넌트
@@ -34,6 +36,8 @@ const PostList = ({
   );
   const [posts, setPosts] = useState<IPostType[]>([]);
   const { user } = useContext(AuthContext);
+  const { showModal, isModalShow, modalMessage, onConfirm, hideModal } =
+    useModal();
 
   /** Firebase에서 posts 컬렉션의 모든 데이터를 가져옴 */
   const getPost = async () => {
@@ -69,12 +73,13 @@ const PostList = ({
   };
   /** 게시글 삭제하는 함수 */
   const handleDelete = async (id: string) => {
-    const confirm = window.confirm("해당 게시물을 삭제하시겠습니까?");
-    if (confirm && id) {
-      await deleteDoc(doc(db, "posts", id));
-      toast.success("게시글을 삭제하였습니다.");
-      getPost(); /** Mount시에만 getPost를 실행하기 때문에 삭제후에 한번 더 호출 */
-    }
+    showModal("해당 게시물을 삭제하시겠습니까?", async () => {
+      if (id) {
+        await deleteDoc(doc(db, "posts", id));
+        toast.success("게시글을 삭제하였습니다.");
+        getPost(); /** Mount시에만 getPost를 실행하기 때문에 삭제후에 한번 더 호출 */
+      }
+    });
   };
   /** Mount 시 실행 */
   React.useEffect(() => {
@@ -146,6 +151,18 @@ const PostList = ({
           <div className="post__no-post">게시글이 없습니다.</div>
         )}
       </div>
+      {isModalShow && (
+        <Modal
+          message={modalMessage}
+          onConfirm={() => {
+            onConfirm();
+            hideModal();
+          }}
+          onHideModal={() => {
+            hideModal();
+          }}
+        />
+      )}
     </>
   );
 };

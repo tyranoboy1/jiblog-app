@@ -5,14 +5,15 @@
   margin: 0 auto;
   max-width: 680px;
   font-size: 16px;
-  color: gray;
+  color: #808080;
   cursor: pointer;
+  font-weight: 500;
   padding: 48px 20px 0px 20px;
 }
 
 .post__navigation--active {
   color: black;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* post list, post detail */
@@ -30,7 +31,7 @@
 .post__box {
   padding-top: 24px;
   padding-bottom: 24px;
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid #808080;
 }
 
 .post__profile-box {
@@ -43,13 +44,13 @@
 .post__profile {
   width: 36px;
   height: 36px;
-  background: #f2f2f2;
+  background: #808080;
   border-radius: 50%;
 }
 
 .post__date,
 .post__author-name {
-  color: gray;
+  color: #808080;
 }
 
 .post__title {
@@ -59,7 +60,7 @@
 }
 
 .post__text {
-  color: dimgray;
+  color: #808080;
   font-size: 16px;
 }
 
@@ -94,13 +95,13 @@
 
 .post__edit a {
   text-decoration: none;
-  color: gray;
+  color: #808080;
 }
 .post__no-post {
   padding: 24px;
   text-align: center;
-  color: gray;
-  border: 1px solid #f2f2f2;
+  color: #808080;
+  border: 1px solid #808080;
   border-radius: 20px;
 }
 
