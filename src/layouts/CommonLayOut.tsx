@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 /** CommonLayOut => 헤더 푸터 중복 적용 안하도록 만든 레이아웃 */
 /** 모든 컴포넌트에 헤더 푸터 적용 => 로그인 회원 가입 제외 */
-const CommonLayOut = () => {
+const CommonLayout = () => {
   return (
     <BlogLayout>
       <Header />
@@ -15,7 +15,7 @@ const CommonLayOut = () => {
   );
 };
 
-export default CommonLayOut;
+export default CommonLayout;
 
 const BlogLayout = styled.div`
   width: 100%;

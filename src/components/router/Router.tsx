@@ -4,12 +4,12 @@ import PostList from "components/post/PostList";
 import PostDetail from "components/post/PostDetail";
 import PostNew from "components/post/PostNew";
 import PostEdit from "components/post/PostEdit";
-import CommonLayOut from "layouts/CommonLayOut";
 import LoginPage from "pages/user/LoginPage";
 import SignUpPage from "pages/user/SignUpPage";
 import { IRouterProps } from "components/router/interface/router.interface";
 import HomePage from "pages/home/HomePage";
 import ProfilePage from "pages/profile/ProfilePage";
+import CommonLayout from "layouts/CommonLayout";
 
 /** Router => 라우팅 컴포넌트 */
 const Router = (props: IRouterProps) => {
@@ -20,7 +20,7 @@ const Router = (props: IRouterProps) => {
     <>
       <Routes>
         {isAuthenticated ? (
-          <Route element={<CommonLayOut />}>
+          <Route element={<CommonLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/posts" element={<PostList />} />
             <Route path="/posts/:id" element={<PostDetail />} />
@@ -30,7 +30,7 @@ const Router = (props: IRouterProps) => {
             <Route path="*" element={<Navigate replace to="/" />} />
           </Route>
         ) : (
-          <Route element={<CommonLayOut />}>
+          <Route element={<CommonLayout />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="*" element={<LoginPage />} />
