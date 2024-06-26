@@ -1,11 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { getAuth } from "firebase/auth";
+import { app } from "firebaseApp";
 
 interface IBlogInitialState {
   isAuthenticated: boolean;
 }
 
+const auth = getAuth(app);
+
 const initialState: IBlogInitialState = {
-  isAuthenticated: false,
+  isAuthenticated: !!auth?.currentUser,
 };
 export const blogSlice = createSlice({
   name: "blogSilce",

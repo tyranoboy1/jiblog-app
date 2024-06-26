@@ -54,7 +54,7 @@
   font-size: 16px;
   background-color: #2563eb;
   color: white;
-  display: block; /* Makes the button a block element */
+  display: block;
 }
 
 .form .form__btn--submit:hover,
