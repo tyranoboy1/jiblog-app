@@ -52,7 +52,7 @@ export const LoginInput = styled.input`
   padding: 10px 10px;
   font-size: 16px;
   border-radius: 0.3rem;
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
   width: 96%;
   max-width: 680px;
 `;

@@ -26,6 +26,7 @@ const Login = () => {
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
+  /** 로그인 버튼 클릭 함수 */
   const loginClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 

@@ -1,13 +1,13 @@
-import { BsSun, BsMoonFill } from "react-icons/bs";
-import { useContext } from "react";
-import ThemeContext from "context/ThemeContext";
+// import { BsSun, BsMoonFill } from "react-icons/bs";
+// import { useContext } from "react";
+// import ThemeContext from "context/ThemeContext";
 
 /** Footer => footer컴포넌트 */
 const Footer = () => {
-  const context = useContext(ThemeContext);
+  // const context = useContext(ThemeContext);
   return (
     <footer>
-      <div>
+      {/* <div>
         {context.theme === "light" ? (
           <BsSun onClick={context.toggleMode} className="footer__theme-btn" />
         ) : (
@@ -16,7 +16,7 @@ const Footer = () => {
             className="footer__theme-btn"
           />
         )}
-      </div>
+      </div> */}
     </footer>
   );
 };
