@@ -1,3 +1,4 @@
+import ToastModal from "components/modal/ToastModal";
 import PostList from "components/post/PostList";
 import Carousel from "components/view/Carousel";
 
@@ -7,6 +8,7 @@ const Home = () => {
     <>
       <Carousel />
       <PostList />
+      <ToastModal text="로그인에 성공하셨습니다." />
     </>
   );
 };

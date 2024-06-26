@@ -7,7 +7,7 @@ import { ThemeContextProvider } from "context/ThemeContext";
 import { ModalContextProvider } from "context/ModalContext";
 import { GlobalStyles } from "styles/globalStyles";
 import { Provider } from "react-redux";
-import store from "../src/redux/store";
+import store from "./store/store";
 import "./index.css";
 
 const root = ReactDOM.createRoot(

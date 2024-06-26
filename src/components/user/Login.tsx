@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "components/user/styles/login.css";
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -15,16 +15,21 @@ import {
   LoginInput,
   LoginLabel,
 } from "./styles/user.styles";
+import { useDispatch } from "react-redux";
+import blogSlice from "store/slices/blogSlice";
+import ToastModal from "components/modal/ToastModal";
 
 /** Login => 로그인 화면 컴포넌트 */
 const Login = () => {
   /** 에러 여부를 관리하는 상태변수 */
   const [error, setError] = useState<string>("");
+  const [loginError, setLoginError] = useState<string>("");
   /** 이메일 관리하는 상태변수 */
   const [email, setEmail] = useState<string>("");
   /** 패스워드 관리하는 상태변수 */
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   /** 로그인 버튼 클릭 함수 */
   const loginClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,11 +41,11 @@ const Login = () => {
       /** 이메일과 비밀번호를 사용하여 사용자를 로그인 */
       await signInWithEmailAndPassword(auth, email, password);
 
-      toast.success("로그인에 성공했습니다.");
+      dispatch(blogSlice.actions.setIsShowModal(true));
       navigate("/");
     } catch (error: any) {
-      toast.error(error?.code);
-      console.log(error);
+      dispatch(blogSlice.actions.setIsShowModal(true));
+      setLoginError(error?.code);
     }
   };
 
@@ -74,53 +79,56 @@ const Login = () => {
     }
   };
   return (
-    <LoginContainer>
-      <LoginCard>
-        <p>로그인</p>
-        <LoginFormContainer>
-          <LoginFormBox>
-            <LoginLabel htmlFor="email">이메일</LoginLabel>
-            <LoginInput
-              type="email"
-              name="email"
-              id="email"
-              required
-              onChange={onChange}
-              value={email}
-            />
-          </LoginFormBox>
-          <LoginFormBox>
-            <LoginLabel htmlFor="password">비밀번호</LoginLabel>
-            <LoginInput
-              type="password"
-              name="password"
-              id="password"
-              required
-              onChange={onChange}
-              value={password}
-            />
-          </LoginFormBox>
-          {error && error?.length > 0 && (
+    <>
+      <LoginContainer>
+        <LoginCard>
+          <p>로그인</p>
+          <LoginFormContainer>
             <LoginFormBox>
-              <ErrorBox>{error}</ErrorBox>
+              <LoginLabel htmlFor="email">이메일</LoginLabel>
+              <LoginInput
+                type="email"
+                name="email"
+                id="email"
+                required
+                onChange={onChange}
+                value={email}
+              />
             </LoginFormBox>
-          )}
-          <LoginFormBox>
-            계정이 없으신가요?
-            <LinkButton onClick={() => navigate("/signup")}>
-              회원가입하기
-            </LinkButton>
-          </LoginFormBox>
-          <LoginButton
-            type="button"
-            disabled={error?.length > 0}
-            onClick={loginClick}
-          >
-            로그인
-          </LoginButton>
-        </LoginFormContainer>
-      </LoginCard>
-    </LoginContainer>
+            <LoginFormBox>
+              <LoginLabel htmlFor="password">비밀번호</LoginLabel>
+              <LoginInput
+                type="password"
+                name="password"
+                id="password"
+                required
+                onChange={onChange}
+                value={password}
+              />
+            </LoginFormBox>
+            {error && error?.length > 0 && (
+              <LoginFormBox>
+                <ErrorBox>{error}</ErrorBox>
+              </LoginFormBox>
+            )}
+            <LoginFormBox>
+              계정이 없으신가요?
+              <LinkButton onClick={() => navigate("/signup")}>
+                회원가입하기
+              </LinkButton>
+            </LoginFormBox>
+            <LoginButton
+              type="button"
+              disabled={error?.length > 0}
+              onClick={loginClick}
+            >
+              로그인
+            </LoginButton>
+          </LoginFormContainer>
+        </LoginCard>
+      </LoginContainer>
+      <ToastModal text={loginError} />
+    </>
   );
 };
 
