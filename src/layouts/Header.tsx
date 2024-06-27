@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   HeaderLayout,
   HeaderLogoButton,
@@ -6,10 +6,10 @@ import {
   WrapperButton,
 } from "./styles/layout.styles";
 import { useSelector } from "react-redux";
-import { RootState } from "redux/slices";
 import write from "assets/svg/write_icon.svg";
 import board from "assets/svg/board_icon.svg";
 import profile from "assets/svg/avatar_profile_icon.svg";
+import { RootState } from "store/slices";
 
 /** Header => header 컴포넌트 */
 const Header = () => {

@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import "components/user/styles/login.css";
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { toast } from "react-toastify";
 import { app } from "firebaseApp";
 import {
   ErrorBox,
@@ -22,8 +21,8 @@ import ToastModal from "components/modal/ToastModal";
 /** Login => 로그인 화면 컴포넌트 */
 const Login = () => {
   /** 에러 여부를 관리하는 상태변수 */
-  const [error, setError] = useState<string>("");
-  const [loginError, setLoginError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [pwdError, setPwdError] = useState<string>("");
   /** 이메일 관리하는 상태변수 */
   const [email, setEmail] = useState<string>("");
   /** 패스워드 관리하는 상태변수 */
@@ -45,10 +44,8 @@ const Login = () => {
       navigate("/");
     } catch (error: any) {
       dispatch(blogSlice.actions.setIsShowModal(true));
-      setLoginError(error?.code);
     }
   };
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     /** input의 name과 value 관리 */
     const {
@@ -62,9 +59,9 @@ const Login = () => {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
       /** value값 정규식 표현과 비교 */
       if (!value?.match(validRegex)) {
-        setError("이메일 형식이 올바르지 않습니다.");
+        setEmailError("이메일 형식이 올바르지 않습니다.");
       } else {
-        setError("");
+        setEmailError("");
       }
     }
 
@@ -72,12 +69,13 @@ const Login = () => {
       setPassword(value);
       /** 비밀번호 길이 제한 */
       if (value?.length < 8) {
-        setError("비밀번호는 8자리 이상 입력해주세요");
+        setPwdError("비밀번호는 8자리 이상 입력해주세요");
       } else {
-        setError("");
+        setPwdError("");
       }
     }
   };
+
   return (
     <>
       <LoginContainer>
@@ -95,6 +93,11 @@ const Login = () => {
                 value={email}
               />
             </LoginFormBox>
+            {emailError && emailError?.length > 0 && (
+              <LoginFormBox>
+                <ErrorBox>{emailError}</ErrorBox>
+              </LoginFormBox>
+            )}
             <LoginFormBox>
               <LoginLabel htmlFor="password">비밀번호</LoginLabel>
               <LoginInput
@@ -106,9 +109,9 @@ const Login = () => {
                 value={password}
               />
             </LoginFormBox>
-            {error && error?.length > 0 && (
+            {pwdError && pwdError?.length > 0 && (
               <LoginFormBox>
-                <ErrorBox>{error}</ErrorBox>
+                <ErrorBox>{pwdError}</ErrorBox>
               </LoginFormBox>
             )}
             <LoginFormBox>
@@ -119,7 +122,7 @@ const Login = () => {
             </LoginFormBox>
             <LoginButton
               type="button"
-              disabled={error?.length > 0}
+              disabled={pwdError?.length > 0 || emailError?.length > 0}
               onClick={loginClick}
             >
               로그인
@@ -127,7 +130,7 @@ const Login = () => {
           </LoginFormContainer>
         </LoginCard>
       </LoginContainer>
-      <ToastModal text={loginError} />
+      <ToastModal text="로그인에 실패하였습니다. 다시 시도해주세요" />
     </>
   );
 };

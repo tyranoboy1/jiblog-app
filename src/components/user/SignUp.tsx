@@ -8,7 +8,11 @@ import { toast } from "react-toastify";
 /** SignUp => 회원가입 화면 컴포넌트 */
 const SignUp = () => {
   /** 에러 여부를 관리하는 상태변수 */
-  const [error, setError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [pwdError, setPwdError] = useState<string>("");
+  const [pwdConfirmError, setPwdConfirmError] = useState<string>("");
+  // const [emailError, setEmailError] = useState<string>("");
+
   /** 이메일 관리하는 상태변수 */
   const [email, setEmail] = useState<string>("");
   /** 패스워드 관리하는 상태변수 */
@@ -24,11 +28,9 @@ const SignUp = () => {
       const auth = getAuth(app);
       /** 새로운 사용자 계정을 Firebase에 생성 */
       await createUserWithEmailAndPassword(auth, email, password);
-      toast.success("회원가입에 성공했습니다.");
       navigate("/login");
     } catch (error: any) {
       console.log(error);
-      toast.error(error?.code);
     }
   };
 
@@ -45,9 +47,9 @@ const SignUp = () => {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
       /** value값 정규식 표현과 비교 */
       if (!value?.match(validRegex)) {
-        setError("이메일 형식이 올바르지 않습니다.");
+        setEmailError("이메일 형식이 올바르지 않습니다.");
       } else {
-        setError("");
+        setEmailError("");
       }
     }
 
@@ -55,12 +57,14 @@ const SignUp = () => {
       setPassword(value);
       /** 비밀번호 길이 제한 */
       if (value?.length < 8) {
-        setError("비밀번호는 8자리 이상으로 입력해주세요");
+        setPwdError("비밀번호는 8자리 이상으로 입력해주세요");
       } else if (passwordConfirm?.length > 0 && value !== passwordConfirm) {
         /** 비밀번호와 비밀번호 확인 값 비교 */
-        setError("비밀번호와 비밀번호 확인 값이 다릅니다. 다시 확인해주세요.");
+        setPwdError(
+          "비밀번호와 비밀번호 확인 값이 다릅니다. 다시 확인해주세요."
+        );
       } else {
-        setError("");
+        setPwdError("");
       }
     }
 
@@ -68,12 +72,14 @@ const SignUp = () => {
       setPasswordConfirm(value);
       /** 비밀번호 길이 제한 */
       if (value?.length < 8) {
-        setError("비밀번호는 8자리 이상으로 입력해주세요");
+        setPwdConfirmError("비밀번호는 8자리 이상으로 입력해주세요");
         /** 비밀번호와 비밀번호 확인 값 비교 */
       } else if (value !== password) {
-        setError("비밀번호와 비밀번호 확인 값이 다릅니다. 다시 확인해주세요.");
+        setPwdConfirmError(
+          "비밀번호와 비밀번호 확인 값이 다릅니다. 다시 확인해주세요."
+        );
       } else {
-        setError("");
+        setPwdConfirmError("");
       }
     }
   };
@@ -90,6 +96,11 @@ const SignUp = () => {
           onChange={onChange}
         />
       </div>
+      {emailError && emailError?.length > 0 && (
+        <div className="form__block">
+          <div className="form__error">{emailError}</div>
+        </div>
+      )}
       <div className="form__block">
         <label htmlFor="password">비밀번호</label>
         <input
@@ -100,6 +111,11 @@ const SignUp = () => {
           onChange={onChange}
         />
       </div>
+      {pwdError && pwdError?.length > 0 && (
+        <div className="form__block">
+          <div className="form__error">{pwdError}</div>
+        </div>
+      )}
       <div className="form__block">
         <label htmlFor="password_confirm">비밀번호 확인</label>
         <input
@@ -110,9 +126,9 @@ const SignUp = () => {
           onChange={onChange}
         />
       </div>
-      {error && error?.length > 0 && (
+      {pwdConfirmError && pwdConfirmError?.length > 0 && (
         <div className="form__block">
-          <div className="form__error">{error}</div>
+          <div className="form__error">{pwdConfirmError}</div>
         </div>
       )}
       <div className="form__block">
@@ -126,7 +142,11 @@ const SignUp = () => {
           type="submit"
           value="회원가입"
           className="form__btn--submit"
-          disabled={error?.length > 0}
+          disabled={
+            pwdError?.length > 0 ||
+            emailError?.length > 0 ||
+            pwdConfirmError?.length > 0
+          }
         />
       </div>
     </form>

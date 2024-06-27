@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import blogSlice from "store/slices/blogSlice";
 import { RootState } from "store/slices";
+import { Button } from "@mui/material";
 
 const style = {
   position: "absolute" as "absolute",
@@ -17,12 +18,16 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
 };
 
 const ToastModal = ({ text }: { text: string }) => {
   const isShowModal = useSelector((state: RootState) => state.blog.isShowModal);
   const dispatch = useDispatch();
 
+  /** modal 창을 닫는 함수 */
   const handleClose = () => {
     dispatch(blogSlice.actions.setIsShowModal(false));
   };
@@ -36,7 +41,13 @@ const ToastModal = ({ text }: { text: string }) => {
         <Typography id="modal-modal-title" variant="h6" component="h2">
           {text}
         </Typography>
-        <button onClick={handleClose}>닫기</button>
+        <Button
+          variant="contained"
+          onClick={handleClose}
+          style={{ width: "30px", marginTop: "30px" }}
+        >
+          닫기
+        </Button>
       </Box>
     </Modal>
   );

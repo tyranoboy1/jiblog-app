@@ -8,7 +8,7 @@ import Loader from "components/view/Loader";
 import ThemeContext from "context/ThemeContext";
 import { useDispatch, useSelector } from "react-redux";
 import { blogSlice } from "./store/slices/blogSlice";
-import { RootState } from "redux/slices";
+import { RootState } from "store/slices";
 
 const App = () => {
   const context = useContext(ThemeContext);
