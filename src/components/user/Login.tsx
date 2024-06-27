@@ -1,25 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import "components/user/styles/login.css";
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "firebaseApp";
 import {
   ErrorBox,
+  FormBox,
+  FormButton,
+  FormCard,
+  FormContainer,
+  FormInput,
+  FormLabel,
   LinkButton,
-  LoginButton,
-  LoginCard,
-  LoginContainer,
-  LoginFormBox,
-  LoginFormContainer,
-  LoginInput,
-  LoginLabel,
+  SubFormContainer,
 } from "./styles/user.styles";
 import { useDispatch } from "react-redux";
 import blogSlice from "store/slices/blogSlice";
 import ToastModal from "components/modal/ToastModal";
 
 /** Login => 로그인 화면 컴포넌트 */
-const Login = () => {
+export const Login = () => {
   /** 에러 여부를 관리하는 상태변수 */
   const [emailError, setEmailError] = useState<string>("");
   const [pwdError, setPwdError] = useState<string>("");
@@ -78,13 +77,13 @@ const Login = () => {
 
   return (
     <>
-      <LoginContainer>
-        <LoginCard>
+      <FormContainer>
+        <FormCard>
           <p>로그인</p>
-          <LoginFormContainer>
-            <LoginFormBox>
-              <LoginLabel htmlFor="email">이메일</LoginLabel>
-              <LoginInput
+          <SubFormContainer>
+            <FormBox>
+              <FormLabel htmlFor="email">이메일</FormLabel>
+              <FormInput
                 type="email"
                 name="email"
                 id="email"
@@ -92,15 +91,15 @@ const Login = () => {
                 onChange={onChange}
                 value={email}
               />
-            </LoginFormBox>
+            </FormBox>
             {emailError && emailError?.length > 0 && (
-              <LoginFormBox>
+              <FormBox>
                 <ErrorBox>{emailError}</ErrorBox>
-              </LoginFormBox>
+              </FormBox>
             )}
-            <LoginFormBox>
-              <LoginLabel htmlFor="password">비밀번호</LoginLabel>
-              <LoginInput
+            <FormBox>
+              <FormLabel htmlFor="password">비밀번호</FormLabel>
+              <FormInput
                 type="password"
                 name="password"
                 id="password"
@@ -108,31 +107,29 @@ const Login = () => {
                 onChange={onChange}
                 value={password}
               />
-            </LoginFormBox>
+            </FormBox>
             {pwdError && pwdError?.length > 0 && (
-              <LoginFormBox>
+              <FormBox>
                 <ErrorBox>{pwdError}</ErrorBox>
-              </LoginFormBox>
+              </FormBox>
             )}
-            <LoginFormBox>
+            <FormBox>
               계정이 없으신가요?
               <LinkButton onClick={() => navigate("/signup")}>
                 회원가입하기
               </LinkButton>
-            </LoginFormBox>
-            <LoginButton
+            </FormBox>
+            <FormButton
               type="button"
               disabled={pwdError?.length > 0 || emailError?.length > 0}
               onClick={loginClick}
             >
               로그인
-            </LoginButton>
-          </LoginFormContainer>
-        </LoginCard>
-      </LoginContainer>
+            </FormButton>
+          </SubFormContainer>
+        </FormCard>
+      </FormContainer>
       <ToastModal text="로그인에 실패하였습니다. 다시 시도해주세요" />
     </>
   );
 };
-
-export default Login;

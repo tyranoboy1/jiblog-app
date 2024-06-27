@@ -1,9 +1,20 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "components/user/styles/login.css";
 import { app } from "firebaseApp";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { toast } from "react-toastify";
+
+import {
+  ErrorBox,
+  FormBox,
+  FormButton,
+  FormCard,
+  FormContainer,
+  FormInput,
+  FormLabel,
+  LinkButton,
+  SubFormContainer,
+} from "./styles/user.styles";
 
 /** SignUp => 회원가입 화면 컴포넌트 */
 const SignUp = () => {
@@ -21,7 +32,8 @@ const SignUp = () => {
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const navigate = useNavigate();
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  /** 회원가입 버튼 클릭 함수 */
+  const signUpClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       /** Firebase 인증 객체를 가져옴  */
@@ -84,72 +96,75 @@ const SignUp = () => {
     }
   };
   return (
-    <form onSubmit={onSubmit} className="form form--lg">
-      <h1 className="form__title">회원가입</h1>
-      <div className="form__block">
-        <label htmlFor="email">이메일</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          required
-          onChange={onChange}
-        />
-      </div>
-      {emailError && emailError?.length > 0 && (
-        <div className="form__block">
-          <div className="form__error">{emailError}</div>
-        </div>
-      )}
-      <div className="form__block">
-        <label htmlFor="password">비밀번호</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          required
-          onChange={onChange}
-        />
-      </div>
-      {pwdError && pwdError?.length > 0 && (
-        <div className="form__block">
-          <div className="form__error">{pwdError}</div>
-        </div>
-      )}
-      <div className="form__block">
-        <label htmlFor="password_confirm">비밀번호 확인</label>
-        <input
-          type="password"
-          name="password_confirm"
-          id="password_confirm"
-          required
-          onChange={onChange}
-        />
-      </div>
-      {pwdConfirmError && pwdConfirmError?.length > 0 && (
-        <div className="form__block">
-          <div className="form__error">{pwdConfirmError}</div>
-        </div>
-      )}
-      <div className="form__block">
-        계정이 이미 있으신가요?
-        <Link to="/login" className="form__link">
-          로그인하기
-        </Link>
-      </div>
-      <div className="form__block">
-        <input
-          type="submit"
-          value="회원가입"
-          className="form__btn--submit"
-          disabled={
-            pwdError?.length > 0 ||
-            emailError?.length > 0 ||
-            pwdConfirmError?.length > 0
-          }
-        />
-      </div>
-    </form>
+    <FormContainer>
+      <FormCard>
+        <p>회원 가입</p>
+        <SubFormContainer>
+          <FormBox>
+            <FormLabel htmlFor="email">이메일</FormLabel>
+            <FormInput
+              type="email"
+              name="email"
+              id="email"
+              required
+              onChange={onChange}
+            />
+          </FormBox>
+          {emailError && emailError?.length > 0 && (
+            <FormBox>
+              <ErrorBox>{emailError}</ErrorBox>
+            </FormBox>
+          )}
+          <FormBox>
+            <FormLabel htmlFor="password">비밀번호</FormLabel>
+            <FormInput
+              type="password"
+              name="password"
+              id="password"
+              required
+              onChange={onChange}
+            />
+          </FormBox>
+          {pwdError && pwdError?.length > 0 && (
+            <FormBox>
+              <ErrorBox>{pwdError}</ErrorBox>
+            </FormBox>
+          )}
+          <FormBox>
+            <FormLabel>비밀번호 확인</FormLabel>
+            <FormInput
+              type="password"
+              name="password_confirm"
+              id="password_confirm"
+              required
+              onChange={onChange}
+            />
+          </FormBox>
+          {pwdConfirmError && pwdConfirmError?.length > 0 && (
+            <FormBox>
+              <ErrorBox>{pwdConfirmError}</ErrorBox>
+            </FormBox>
+          )}
+          <FormBox>
+            계정이 이미 있으신가요?
+            <LinkButton onClick={() => navigate("/signin")}>
+              로그인 하기
+            </LinkButton>
+          </FormBox>
+          <FormButton
+            type="button"
+            disabled={
+              pwdError?.length > 0 ||
+              emailError?.length > 0 ||
+              pwdConfirmError.length > 0
+            }
+            onClick={signUpClick}
+          >
+            회원가입
+          </FormButton>
+        </SubFormContainer>
+      </FormCard>
+    </FormContainer>
   );
 };
 

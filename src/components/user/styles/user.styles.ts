@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoginContainer = styled.div`
+export const FormContainer = styled.div`
   margin: 0 auto;
   height: 850px;
   max-width: 680px;
@@ -10,7 +10,7 @@ export const LoginContainer = styled.div`
   padding-top: 5px;
   margin-top: 20px;
 `;
-export const LoginCard = styled.div`
+export const FormCard = styled.div`
   min-height: 70vh;
   margin-top: 10vh;
   border: 1px solid #000000;
@@ -27,7 +27,7 @@ export const LoginCard = styled.div`
     justify-content: center;
   }
 `;
-export const LoginFormContainer = styled.div`
+export const SubFormContainer = styled.div`
   flex: 1;
   margin-top: 40px;
   display: flex;
@@ -37,17 +37,17 @@ export const LoginFormContainer = styled.div`
     margin-top: 80px;
   }
 `;
-export const LoginFormBox = styled.div`
+export const FormBox = styled.div`
   width: 100%;
 `;
-export const LoginLabel = styled.label`
+export const FormLabel = styled.label`
   display: block;
   font-weight: 700;
   margin-bottom: 10px;
   margin-top: 20px;
 `;
 
-export const LoginInput = styled.input`
+export const FormInput = styled.input`
   height: 20px;
   padding: 10px 10px;
   font-size: 16px;
@@ -57,7 +57,7 @@ export const LoginInput = styled.input`
   max-width: 680px;
 `;
 
-export const LoginButton = styled.button`
+export const FormButton = styled.button`
   width: 100%;
   height: 48px;
   font-weight: 600;
@@ -66,14 +66,14 @@ export const LoginButton = styled.button`
   cursor: pointer;
   margin: 0 auto;
   font-size: 16px;
-  background-color: #2563eb;
+  background-color: ${(props) => (props.disabled ? "#ccc" : "#2563eb")};
   color: white;
   display: block;
   &:hover {
-    background-color: #1945a4;
+    background-color: ${(props) => (props.disabled ? "#ccc" : "#1945a4")};
   }
   &:active {
-    background-color: #1945a4;
+    background-color: ${(props) => (props.disabled ? "#ccc" : "#1945a4")};
   }
 `;
 
